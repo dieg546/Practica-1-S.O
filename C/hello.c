@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <unistd.h>
-#include <pwd.h>
 #include <dirent.h>
 #include <string.h>
 
@@ -19,7 +18,13 @@ int main(){
 	DIR *directorio = opendir(".");
 
 	//Obtenemos la ruta actual
-	getcwd(path, sizeof(path));
+
+	if(getcwd(path, sizeof(path)) == NULL){
+
+		printf("Hubo un error al buscar la ruta");
+		return 1;
+
+	}
 
 	//Condicion para saber si el directorio existe
 	if(directorio == NULL){
@@ -48,7 +53,5 @@ int main(){
 	closedir(directorio);
 
 	printf("La cantidad de archivos es %d\n", contador_archivos);
-
 	return 0;
-
 }
