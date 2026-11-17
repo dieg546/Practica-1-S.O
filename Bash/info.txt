@@ -1,0 +1,8 @@
+
+	Nombre de la ruta actual: /home/diego/Escritorio/Sistemas Operativos/Bash
+	Usuario actual: diego
+	Cantidad de Memoria: 5,6Gi
+	Procesador: AMD Ryzen AI 5 340 w/ Radeon 840M
+	Cantidad de archivos en el directorio: 2
+	
+
