@@ -1,0 +1,25 @@
+Comandos para ejecutar el codigo:
+
+- nano sysinfo.sh Permite editar el Codigo
+
+- bash sysinfo.sh Ejecuta el script
+
+- cat info.txt Podemos visualizar lo que creo y escribio el Script.
+
+
+
+- ruta_actual=$(pwd): Guarda en la variable ruta_actual la ruta absoluta del 
+directorio donde te encuentras ejecutando el script (gracias al comando pwd).
+
+- user=$USER: Almacena en la variable user el nombre del usuario actual del 
+sistema operativo (obtenido de la variable de entorno $USER).
+
+- procesador=$(lscpu | grep "Nombre del modelo" | cut -d ":" -f 2| xargs): Obtiene el modelo exacto del procesador. 
+Ejecuta lscpu para listar la información de la CPU, filtra la línea con grep, extrae el texto después de los dos puntos 
+con cut, y xargs limpia los espacios en blanco sobrantes al inicio y al final.
+
+- memoria=$(free -h | awk '/^Mem:/ {print $2}'): Consulta la memoria RAM disponible en formato legible para humanos (-h) usando free, 
+y con awk extrae específicamente el valor de la capacidad total de memoria de la segunda columna.
+
+- cantidad_archivos=$(ls -1 | wc -l): Cuenta cuántos archivos y carpetas hay en el directorio actual 
+listándolos uno por línea (ls -1) y contando el total de líneas resultantes (wc -l).
