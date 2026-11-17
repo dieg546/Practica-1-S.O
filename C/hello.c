@@ -10,12 +10,13 @@
 int main(){
 
 	//Variables
-	char path[1084];
-	struct dirent *entrada;
-	int contador_archivos = 0;
+        char path[1084];
+        struct dirent *entrada;
+        int contador_archivos = 0;
 
-	//Abrimos el Directorio
-	DIR *directorio = opendir(".");
+        //Abrimos el Directorio
+        DIR *directorio = opendir(".");
+
 
 	//Obtenemos la ruta actual
 
@@ -26,32 +27,42 @@ int main(){
 
 	}
 
-	//Condicion para saber si el directorio existe
-	if(directorio == NULL){
+        //Obtenemos la ruta actual
 
-		perror("No se pudo abrir el directorio");
-		return 1;
-	}
+        if(getcwd(path, sizeof(path)) == NULL){
 
-	printf("Ruta Actual: %s \n", path);
-	printf("****LISTADO DE ARCHIVOS****\n");
+                printf("Hubo un error al buscar la ruta");
+                return 1;
 
-	//Iteramos sobre la variable entrada. readdir hace el trabajo de ir archivo por archivo.
-	while((entrada = readdir(directorio)) != NULL){
+        }
 
-		//Permite ignorar la carpeta actual "." y la carpeta padre ".." para imprimir solo los archivos.
-		if(strcmp(entrada->d_name, ".") !=0 && strcmp(entrada->d_name, "..") != 0){
+        //Condicion para saber si el directorio existe
+        if(directorio == NULL){
 
-			printf("- %s\n", entrada->d_name);
-			contador_archivos++;
+                perror("No se pudo abrir el directorio");
+                return 1;
+        }
 
-		}
+        printf("Ruta Actual: %s \n", path);
+        printf("****LISTADO DE ARCHIVOS****\n");
 
-	}
+        //Iteramos sobre la variable entrada. readdir hace el trabajo de ir archivo por archivo.
+        while((entrada = readdir(directorio)) != NULL){
 
-	//Importante cerrar el archivo al terminar las operaciones
-	closedir(directorio);
+                //Permite ignorar la carpeta actual "." y la carpeta padre ".." para imprimir solo los archivos.
+                if(strcmp(entrada->d_name, ".") !=0 && strcmp(entrada->d_name, "..") != 0){
 
-	printf("La cantidad de archivos es %d\n", contador_archivos);
-	return 0;
+                        printf("- %s\n", entrada->d_name);
+                        contador_archivos++;
+
+                }
+
+        }
+
+        //Importante cerrar el archivo al terminar las operaciones
+        closedir(directorio);
+
+        printf("La cantidad de archivos es %d\n", contador_archivos);
+        return 0;
 }
+
